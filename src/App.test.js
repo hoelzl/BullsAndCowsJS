@@ -5,7 +5,6 @@ import App from './App';
 import HeroBar from './HeroBar';
 import InstructionSegment from './InstructionSegment';
 import InputSegment from './InputSegment';
-import GuessEvaluationSegment from './GuessEvaluationSegment';
 
 describe('<App />', () => {
   it('renders without crashing', () => {
@@ -28,18 +27,6 @@ describe('<App />', () => {
     const wrapper = shallow(<App />);
 
     expect(wrapper).toContainMatchingElement('InputSegment');
-  });
-
-  it('initially contains no GuessEvaluationSegment', () => {
-    const wrapper = shallow(<App />);
-
-    expect(wrapper).not.toContainMatchingElement('GuessEvaluationSegment');
-  });
-
-  it('contains GuessEvaluationSegment after adding number', () => {
-    const wrapper = shallow(<App />);
-    wrapper.instance().addGuess('foo');
-    expect(wrapper).toContainMatchingElement('GuessEvaluationSegment');
   });
 });
 
@@ -76,26 +63,5 @@ describe('<App /> (different testing strategy)', () => {
     const wrapper = shallow(<App />);
 
     expect(wrapper.childAt(2).type()).toBe(InputSegment);
-  });
-
-  it('has four children after adding a guess', () => {
-    const wrapper = shallow(<App />);
-    wrapper.instance().addGuess('foo');
-
-    expect(wrapper.children().length).toBe(4);
-  });
-
-  it('has GuessEvaluationSegment as fourth child', () => {
-    const wrapper = shallow(<App />);
-    wrapper.instance().addGuess('foo');
-
-    expect(wrapper.childAt(3).type()).toBe(GuessEvaluationSegment);
-  });
-});
-
-describe('<App /> (snapshot test)', () => {
-  it('matches snapshot', () => {
-    const wrapper = mount(<App />);
-    expect(wrapper).toMatchSnapshot();
   });
 });
